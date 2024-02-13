@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Theme from "./Theme";
+import MobileNav from "./MobileNav";
+import GlobalSearch from "../search/GlobalSearch";
 
 const Navbar = async () => {
   const session = await auth();
@@ -20,10 +22,11 @@ const Navbar = async () => {
           Dev <span className="text-primary-500">Flow</span>
         </p>
       </Link>
-      Global Search
+      <GlobalSearch />
       <div className="flex-between gap-5">
         <Theme />
         {session ? <UserNav /> : <div>Login</div>}
+        <MobileNav />
       </div>
     </nav>
   );
