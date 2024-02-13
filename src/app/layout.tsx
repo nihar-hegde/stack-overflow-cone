@@ -4,6 +4,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/authentication/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,16 +28,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
