@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+
 import {
   Sheet,
-  SheetClose,
   SheetContent,
+  SheetClose,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Image from "next/image";
@@ -15,12 +15,16 @@ import { useSession } from "next-auth/react";
 
 const NavContent = () => {
   const pathname = usePathname();
+
   return (
     <section className="flex h-full flex-col gap-6 pt-16">
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
           pathname === item.route;
+
+        // TODO
+
         return (
           <SheetClose asChild key={item.route}>
             <Link
@@ -51,13 +55,12 @@ const NavContent = () => {
 
 const MobileNav = () => {
   const session = useSession();
-  const test = session.data;
-  console.log(test);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Image
-          src={"/assets/icons/hamburger.svg"}
+          src="/assets/icons/hamburger.svg"
           width={36}
           height={36}
           alt="Menu"
@@ -65,36 +68,42 @@ const MobileNav = () => {
         />
       </SheetTrigger>
       <SheetContent
-        side={"left"}
+        side="left"
         className="background-light900_dark200 border-none"
       >
-        <Link href={"/"} className="flex items-center gap-1">
+        <Link href="/" className="flex items-center gap-1">
           <Image
-            src={"/assets/images/site-logo.svg"}
+            src="/assets/images/site-logo.svg"
             width={23}
             height={23}
             alt="DevFlow"
           />
-          <p className="h2-bold  text-dark100_light900 font-spaceGrotesk ">
-            Dev <span className="text-primary-500">Flow</span>
+
+          <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
+            Dev <span className="text-primary-500">Overflow</span>
           </p>
         </Link>
-        <SheetClose asChild>
-          <NavContent />
-        </SheetClose>
-        {session.data ? (
-          <div>Logout</div>
-        ) : (
-          <div className="flex flex-col gap-3">
-            <SheetClose asChild>
-              <Link href={"/sign-in "}>
-                <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
-                  <span className="primary-text-gradient">Sign In</span>
-                </Button>
-              </Link>
-            </SheetClose>
-          </div>
-        )}
+        <div>
+          <SheetClose asChild>
+            <NavContent />
+          </SheetClose>
+
+          {/* <SignedOut> */}
+          {session.status === "unauthenticated" ? (
+            <div className="flex flex-col gap-3">
+              <SheetClose asChild>
+                <Link href="/sign-in">
+                  <Button className="small-medium btn-secondary min-h-[41px] w-full rounded-lg px-4 py-3 shadow-none">
+                    <span className="primary-text-gradient">Log In</span>
+                  </Button>
+                </Link>
+              </SheetClose>
+            </div>
+          ) : (
+            <div>loggedin</div>
+          )}
+          {/* </SignedOut> */}
+        </div>
       </SheetContent>
     </Sheet>
   );
