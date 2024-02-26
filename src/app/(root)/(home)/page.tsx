@@ -1,7 +1,8 @@
 import LoginButton from "@/components/auth/LoginButton";
+
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+const Home = async () => {
   return (
     <div>
       <h1 className="h1-bold">Hello World</h1>
@@ -10,4 +11,5 @@ export default function Home() {
       </LoginButton>
     </div>
   );
-}
+};
+export default Home;
