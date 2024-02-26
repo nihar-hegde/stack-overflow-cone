@@ -1,34 +1,35 @@
+"use client";
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Button } from "../ui/button";
-// import { signIn } from "next-auth/react";
-// import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { signIn } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "@/authentication/routes";
 
 export const Social = () => {
   const onClick = (provider: "google" | "github") => {
-    // signIn(provider, {
-    //   callbackUrl: DEFAULT_LOGIN_REDIRECT,
-    // });
+    signIn(provider, {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+    });
   };
   return (
-    <div className="flex w-full items-center gap-x-2">
+    <div className="flex w-full flex-col items-center gap-2">
       <Button
         size={"lg"}
-        className="w-full"
+        className="flex w-full items-center justify-start gap-2"
         variant={"outline"}
         onClick={() => onClick("google")}
       >
-        <FcGoogle className={"size-5"} />
+        <FcGoogle className={"size-5"} /> Continue with Google.
       </Button>
 
       <Button
         size={"lg"}
-        className="w-full"
+        className="flex w-full items-center justify-start gap-2"
         variant={"outline"}
         onClick={() => onClick("github")}
       >
-        <FaGithub className={"size-5"} />
+        <FaGithub className={"size-5"} /> Continue with Github.
       </Button>
     </div>
   );

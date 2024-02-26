@@ -5,12 +5,12 @@ const SignInPage = () => {
   return (
     <CardWrapper
       headerLabel="Welcome Back!"
-      backButtonHref="/sign-up"
-      backButtonLabel="Don't Have an account?"
+      backButtonHref="/"
+      backButtonLabel="Back to Home"
       showSocial
     >
       <h1 className="flex items-center justify-center text-center font-semibold">
-        Login with Google or Github
+        Proceed with Google or Github.
       </h1>
     </CardWrapper>
   );
