@@ -25,7 +25,7 @@ const Navbar = async () => {
       <GlobalSearch />
       <div className="flex-between gap-5">
         <Theme />
-        {session ? <UserNav /> : <div>Login</div>}
+        {session ? <UserNav /> : null}
         <MobileNav />
       </div>
     </nav>
